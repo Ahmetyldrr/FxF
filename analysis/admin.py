@@ -29,3 +29,24 @@ class MatchStatsAdmin(admin.ModelAdmin):
 
 # `MatchStats` modelini ve `MatchStatsAdmin` sınıfını admin paneline ekliyoruz
 admin.site.register(MatchStats, MatchStatsAdmin)
+
+
+
+
+
+
+
+from django.contrib import admin
+from .models import MatchInfo  # Aynı dizindeki models.py dosyasından MatchInfo modelini içeri aktarıyoruz
+
+@admin.register(MatchInfo)  # Modeli admin paneline eklemek için dekoratör kullanıyoruz
+class MatchInfoAdmin(admin.ModelAdmin):
+    # Admin panelinde hangi alanların gösterileceğini belirt
+    list_display = (
+        "match_id", "tournament_name", "tournament_category_name", "season_name", "home_team_name", "away_team_name", 
+        "home_score_period1", "away_score_period1", "start_timestamp"
+    )
+    # Admin panelinde hangi alanlardan arama yapılabileceğini belirt
+    search_fields = ("match_id", "tournament_name", "home_team_name", "away_team_name")
+    # Admin panelinde hangi alanlara göre filtreleme yapılabileceğini belirt
+    list_filter = ("season_name", "tournament_category_name", "home_team_name", "away_team_name")
