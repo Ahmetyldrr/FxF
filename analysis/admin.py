@@ -74,3 +74,6 @@ class PlayerPerformanceAdmin(admin.ModelAdmin):
         return obj.team == "home"
 
     home.boolean = True  # True/False alanları için
+
+
+
