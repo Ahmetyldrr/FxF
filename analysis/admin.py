@@ -5,14 +5,52 @@ from .models import MatchStats
 
 from django.contrib import admin
 from .models import MatchStats
+from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
-# `MatchStats` modeli için özelleştirilmiş bir admin sınıfı oluşturuyoruz.
+class EmptyStatsFilter(admin.SimpleListFilter):
+    title = _('Stats Durumu')
+    parameter_name = 'stats_empty'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('empty', _('Veri yok')),
+            ('not_empty', _('Veri var')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'empty':
+            return queryset.filter(stats__isnull=True) | queryset.filter(stats__exact='')
+        if self.value() == 'not_empty':
+            return queryset.exclude(stats__isnull=True).exclude(stats__exact='')
+
+from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+
+class EmptyStatsFilter(admin.SimpleListFilter):
+    title = _('Stats Durumu')
+    parameter_name = 'stats_empty'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('empty', _('Veri yok')),
+            ('not_empty', _('Veri var')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'empty':
+            return queryset.filter(stats__isnull=True) | queryset.filter(stats__exact='')
+        if self.value() == 'not_empty':
+            return queryset.exclude(stats__isnull=True).exclude(stats__exact='')
+
+
+
 class MatchStatsAdmin(admin.ModelAdmin):
     # Admin panelinde listede görünecek alanlar
     list_display = ('id', 'tarih', 'update_date', 'stats_summary')
     
     # Admin panelinde filtreleme yapabileceğimiz alanlar
-    list_filter = ('tarih', 'update_date')
+    list_filter = ('tarih', 'update_date', EmptyStatsFilter)  # Özel filtreyi ekledik
     
     # Admin panelinde arama yapabileceğimiz alanlar
     search_fields = ('id', 'tarih')
@@ -23,11 +61,8 @@ class MatchStatsAdmin(admin.ModelAdmin):
         if obj.stats:
             return str(obj.stats)[:300] + "..." if len(str(obj.stats)) > 10 else str(obj.stats)
         return "Veri yok"
-    
-    # Sütun başlığı için daha okunabilir bir isim
-    stats_summary.short_description = 'İstatistik Özeti'
 
-# `MatchStats` modelini ve `MatchStatsAdmin` sınıfını admin paneline ekliyoruz
+
 admin.site.register(MatchStats, MatchStatsAdmin)
 
 
@@ -50,6 +85,9 @@ class MatchInfoAdmin(admin.ModelAdmin):
     search_fields = ("match_id", "tournament_name", "home_team_name", "away_team_name")
     # Admin panelinde hangi alanlara göre filtreleme yapılabileceğini belirt
     list_filter = ("season_name", "tournament_category_name", "home_team_name", "away_team_name")
+
+
+
 
 
 from django.contrib import admin
