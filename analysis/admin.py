@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib import admin
 
 from django.contrib import admin
@@ -115,3 +116,5 @@ class PlayerPerformanceAdmin(admin.ModelAdmin):
 
 
 
+=======
+>>>>>>> ecd6c88f7ec7bd98d4581c9ee8c5d25a2c400714

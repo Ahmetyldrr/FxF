@@ -1,135 +1,50 @@
 from django.db import models
 
-# Create your models here.
-
-
-from django.db import models
-
-class TeamPerformance(models.Model):
+class Tournament(models.Model):
+    tournament_uniqueTournament_id = models.IntegerField()
+    tournament_name = models.CharField(max_length=255)
+    tournament_slug = models.CharField(max_length=255)
+    tournament_category_name = models.CharField(max_length=255)
+    tournament_category_slug = models.CharField(max_length=255)
+    tournament_uniqueTournament_category_id = models.IntegerField()
+    tournament_uniqueTournament_hasEventPlayerStatistics = models.BooleanField(default=False)
+    tournament_id = models.IntegerField()
     
-    match_id = models.IntegerField()
-    # Team X Fields
-    team_name_x = models.CharField(max_length=100)
-    team_id_x = models.IntegerField()
-    player_height_x = models.FloatField()
-    PAS_total_passes_x = models.IntegerField()
-    PAS_accurate_passes_x = models.IntegerField()
-    PAS_long_balls_x = models.IntegerField()
-    PAS_accurate_long_balls_x = models.IntegerField()
-    ATT_goal_assist_x = models.IntegerField()
-    MUC_duel_won_x = models.IntegerField()
-    MUC_fouls_suffered_x = models.IntegerField()
-    KAL_good_high_claim_x = models.IntegerField()
-    KAL_saved_shots_from_inside_the_box_x = models.IntegerField()
-    KAL_saves_x = models.IntegerField()
-    minutes_played_x = models.IntegerField()
-    touches_x = models.IntegerField()
-    rating_x = models.FloatField()
-    MUC_possession_lost_x = models.IntegerField()
-    rating_original_x = models.FloatField()
-    rating_alternative_x = models.FloatField()
-    PAS_crosses_x = models.IntegerField()
-    PAS_accurate_crosses_x = models.IntegerField()
-    MUC_aerial_duel_won_x = models.IntegerField()
-    MUC_duel_lost_x = models.IntegerField()
-    MUC_challenge_lost_x = models.IntegerField()
-    MUC_total_contest_x = models.IntegerField()
-    DEF_blocked_scoring_attempt_x = models.IntegerField()
-    DEF_tackles_x = models.IntegerField()
-    MUC_aerial_lost_x = models.IntegerField()
-    MUC_won_contest_x = models.IntegerField()
-    ATT_big_chance_created_x = models.IntegerField()
-    DEF_clearances_x = models.IntegerField()
-    DEF_interceptions_x = models.IntegerField()
-    MUC_fouls_committed_x = models.IntegerField()
-    PAS_key_passes_x = models.IntegerField()
-    DEF_outfielder_block_x = models.IntegerField()
-    MUC_dispossessed_x = models.IntegerField()
-    ATT_big_chance_missed_x = models.IntegerField()
-    ATT_on_target_scoring_attempt_x = models.IntegerField()
-    ATT_shot_off_target_x = models.IntegerField()
-    ATT_hit_woodwork_x = models.IntegerField()
-    MUC_offsides_x = models.IntegerField()
-    KAL_punches_x = models.IntegerField()
-    KAL_total_keeper_sweeper_x = models.IntegerField()
-    KAL_accurate_keeper_sweeper_x = models.IntegerField()
-    ATT_goals_x = models.IntegerField()
-    MUC_error_lead_to_a_shot_x = models.IntegerField()
-    DEF_penalty_conceded_x = models.IntegerField()
-    DEF_last_man_tackle_x = models.IntegerField()
-    DEF_own_goals_x = models.IntegerField()
-    ATT_expected_goals_x = models.FloatField()
-    ATT_expected_assists_x = models.FloatField()
-    ATT_penalty_won_x = models.IntegerField()
-    ATT_penalty_miss_x = models.IntegerField()
-    DEF_clearance_off_line_x = models.IntegerField()
-    KAL_goals_prevented_x = models.FloatField()
-    MUC_error_lead_to_a_goal_x = models.IntegerField()
-    KAL_penalty_save_x = models.IntegerField()
+    # Bu iki alan True, False, Boş (None) ve 0 olabilir
+    tournament_isGroup = models.BooleanField(null=True, blank=True, default=False)
+    tournament_uniqueTournament_hasPerformanceGraphFeature = models.BooleanField(null=True, blank=True, default=False)
 
-    # Team Y Fields
-    team_name_y = models.CharField(max_length=100)
-    team_id_y = models.IntegerField()
-    player_height_y = models.FloatField()
-    PAS_total_passes_y = models.IntegerField()
-    PAS_accurate_passes_y = models.IntegerField()
-    PAS_long_balls_y = models.IntegerField()
-    PAS_accurate_long_balls_y = models.IntegerField()
-    ATT_goal_assist_y = models.IntegerField()
-    MUC_duel_won_y = models.IntegerField()
-    MUC_fouls_suffered_y = models.IntegerField()
-    KAL_good_high_claim_y = models.IntegerField()
-    KAL_saved_shots_from_inside_the_box_y = models.IntegerField()
-    KAL_saves_y = models.IntegerField()
-    minutes_played_y = models.IntegerField()
-    touches_y = models.IntegerField()
-    rating_y = models.FloatField()
-    MUC_possession_lost_y = models.IntegerField()
-    rating_original_y = models.FloatField()
-    rating_alternative_y = models.FloatField()
-    PAS_crosses_y = models.IntegerField()
-    PAS_accurate_crosses_y = models.IntegerField()
-    MUC_aerial_duel_won_y = models.IntegerField()
-    MUC_duel_lost_y = models.IntegerField()
-    MUC_challenge_lost_y = models.IntegerField()
-    MUC_total_contest_y = models.IntegerField()
-    DEF_blocked_scoring_attempt_y = models.IntegerField()
-    DEF_tackles_y = models.IntegerField()
-    MUC_aerial_lost_y = models.IntegerField()
-    MUC_won_contest_y = models.IntegerField()
-    ATT_big_chance_created_y = models.IntegerField()
-    DEF_clearances_y = models.IntegerField()
-    DEF_interceptions_y = models.IntegerField()
-    MUC_fouls_committed_y = models.IntegerField()
-    PAS_key_passes_y = models.IntegerField()
-    DEF_outfielder_block_y = models.IntegerField()
-    MUC_dispossessed_y = models.IntegerField()
-    ATT_big_chance_missed_y = models.IntegerField()
-    ATT_on_target_scoring_attempt_y = models.IntegerField()
-    ATT_shot_off_target_y = models.IntegerField()
-    ATT_hit_woodwork_y = models.IntegerField()
-    MUC_offsides_y = models.IntegerField()
-    KAL_punches_y = models.IntegerField()
-    KAL_total_keeper_sweeper_y = models.IntegerField()
-    KAL_accurate_keeper_sweeper_y = models.IntegerField()
-    ATT_goals_y = models.IntegerField()
-    MUC_error_lead_to_a_shot_y = models.IntegerField()
-    DEF_penalty_conceded_y = models.IntegerField()
-    DEF_last_man_tackle_y = models.IntegerField()
-    DEF_own_goals_y = models.IntegerField()
-    ATT_expected_goals_y = models.FloatField()
-    ATT_expected_assists_y = models.FloatField()
-    ATT_penalty_won_y = models.IntegerField()
-    ATT_penalty_miss_y = models.IntegerField()
-    DEF_clearance_off_line_y = models.IntegerField()
-    KAL_goals_prevented_y = models.FloatField()
-    MUC_error_lead_to_a_goal_y = models.IntegerField()
-    KAL_penalty_save_y = models.IntegerField()
-    
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['match_id', 'team_id_x'], name='unique_match_id_team')
-        ]
-    # Optional: __str__ method to define how objects of this class will be represented as strings
     def __str__(self):
-        return f"{self.team_name_x} vs {self.team_name_y} (Match ID: {self.match_id})"
+        return self.tournament_name
+
+    class Meta:
+        verbose_name = 'Tournament'
+        verbose_name_plural = 'Tournaments'
+
+
+
+
+class Season(models.Model):
+    season_id = models.IntegerField()  # Sezon için birincil anahtar
+    season_name = models.CharField(max_length=255)
+    season_year = models.CharField(max_length=9)  # Yıl bilgisini string olarak saklıyoruz (2024/2025 gibi)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='seasons')
+
+    def __str__(self):
+        return f"{self.season_name} ({self.season_year})"
+    
+    
+class Team(models.Model):
+    team_id = models.IntegerField() 
+    team_name = models.CharField(max_length=255)
+    team_slug = models.SlugField(max_length=255)
+    team_shortName = models.CharField(max_length=100)
+    team_nameCode = models.CharField(max_length=10)
+    team_national = models.BooleanField(default=False)  # YANLIŞ olarak verdiğin veri, Boolean tipi olabilir
+
+    # ForeignKey alanları: Tournament ve Season modellerine bağlanıyor.
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    season = models.ForeignKey(Season, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.team_name
